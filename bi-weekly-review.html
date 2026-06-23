@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bi-Weekly Leadership Review</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .presentation-wrapper {
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .slide {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+            padding: 60px 50px;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            page-break-after: always;
+        }
+
+        .slide.title {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 50px;
+        }
+
+        .slide.title h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .slide.title .subtitle {
+            font-size: 24px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .slide.title .date {
+            font-size: 18px;
+            opacity: 0.7;
+            margin-top: 40px;
+        }
+
+        h2 {
+            color: #1a1a2e;
+            font-size: 42px;
+            margin-bottom: 30px;
+            font-weight: 700;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 20px;
+        }
+
+        .content {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 8px;
+            color: white;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .bullet-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .bullet-list li {
+            margin: 18px 0;
+            padding-left: 40px;
+            position: relative;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .bullet-list li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 24px;
+        }
+
+        .section-header {
+            color: #667eea;
+            font-weight: 700;
+            margin-top: 20px;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .highlight {
+            background: #ffd89b;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .risk-item {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .risk-title {
+            font-weight: 700;
+            color: #856404;
+            margin-bottom: 8px;
+        }
+
+        .success-item {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .success-title {
+            font-weight: 700;
+            color: #155724;
+            margin-bottom: 8px;
+        }
+
+        .action-item {
+            background: #e7f3ff;
+            border-left: 4px solid #0066cc;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .action-title {
+            font-weight: 700;
+            color: #003d99;
+            margin-bottom: 8px;
+        }
+
+        .action-owner {
+            font-size: 14px;
+            color: #005a99;
+            margin-top: 8px;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .navigation {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            margin: 0 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #764ba2;
+        }
+
+        .print-note {
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .navigation, .print-note {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 40px 30px;
+                min-height: auto;
+            }
+
+            h2 {
+                font-size: 32px;
+            }
+
+            .slide.title h1 {
+                font-size: 40px;
+            }
+
+            .metrics {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-wrapper">
+        <!-- Slide 1: Title -->
+        <div class="slide title">
+            <h1>Bi-Weekly Leadership Review</h1>
+            <div class="subtitle">CX Project Status & Strategic Updates</div>
+            <div class="date" id="currentDate"></div>
+            <div class="slide-number">1</div>
+        </div>
+
+        <!-- Slide 2: Key Metrics -->
+        <div class="slide">
+            <h2>Key Metrics & Performance</h2>
+            <div class="metrics">
+                <div class="metric-card">
+                    <div class="metric-value">92%</div>
+                    <div class="metric-label">Project Completion</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">8/10</div>
+                    <div class="metric-label">Team Health Score</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">14</div>
+                    <div class="metric-label">Open Action Items</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">100%</div>
+                    <div class="metric-label">Budget Tracking</div>
+                </div>
+            </div>
+            <div class="slide-number">2</div>
+        </div>
+
+        <!-- Slide 3: Progress Updates -->
+        <div class="slide">
+            <h2>Progress & Updates</h2>
+            <ul class="bullet-list">
+                <li><span class="section-header">Initiative 1:</span> Current phase on track with <span class="highlight">95% completion</span></li>
+                <li><span class="section-header">Initiative 2:</span> Delivered key milestone ahead of schedule</li>
+                <li><span class="section-header">Initiative 3:</span> Customer feedback incorporated; preparing for next phase</li>
+                <li><span class="section-header">Initiative 4:</span> Team coordination improved; dependencies resolved</li>
+            </ul>
+            <div class="slide-number">3</div>
+        </div>
+
+        <!-- Slide 4: Wins & Achievements -->
+        <div class="slide">
+            <h2>Wins & Achievements</h2>
+            <div class="success-item">
+                <div class="success-title">✓ Successful Deployment</div>
+                <p>Deployed new system with zero downtime; exceeded performance targets by 15%</p>
+            </div>
+            <div class="success-item">
+                <div class="success-title">✓ Team Milestone</div>
+                <p>Team achieved certification target; 100% participation in training programs</p>
+            </div>
+            <div class="success-item">
+                <div class="success-title">✓ Customer Satisfaction</div>
+                <p>NPS score improved to 8.5/10; positive feedback from key stakeholders</p>
+            </div>
+            <div class="slide-number">4</div>
+        </div>
+
+        <!-- Slide 5: Risks & Challenges -->
+        <div class="slide">
+            <h2>Risks & Challenges</h2>
+            <div class="risk-item">
+                <div class="risk-title">⚠ Resource Constraint</div>
+                <p>Need additional engineering resources for Q3 initiatives. Mitigation: Cross-training ongoing.</p>
+            </div>
+            <div class="risk-item">
+                <div class="risk-title">⚠ Vendor Dependency</div>
+                <p>Third-party API delays may impact timeline. Mitigation: Exploring alternative solutions.</p>
+            </div>
+            <div class="risk-item">
+                <div class="risk-title">⚠ Integration Challenge</div>
+                <p>Legacy system compatibility issues. Mitigation: Technical deep-dive scheduled for next week.</p>
+            </div>
+            <div class="slide-number">5</div>
+        </div>
+
+        <!-- Slide 6: Action Items -->
+        <div class="slide">
+            <h2>Action Items & Decisions</h2>
+            <div class="action-item">
+                <div class="action-title">Approve Budget Allocation for Q3 Initiatives</div>
+                <p>Requested budget: $250K for expanded team and tools</p>
+                <div class="action-owner">Owner: Finance Lead | Due: This week</div>
+            </div>
+            <div class="action-item">
+                <div class="action-title">Resolve Integration Dependencies</div>
+                <p>Schedule technical alignment with platform team</p>
+                <div class="action-owner">Owner: Tech Lead | Due: Next 5 days</div>
+            </div>
+            <div class="action-item">
+                <div class="action-title">Customer Kickoff for Phase 2</div>
+                <p>Coordinate with sales to finalize requirements</p>
+                <div class="action-owner">Owner: PM | Due: End of week</div>
+            </div>
+            <div class="slide-number">6</div>
+        </div>
+
+        <!-- Slide 7: Next Steps -->
+        <div class="slide">
+            <h2>Next Steps & Priorities</h2>
+            <ul class="bullet-list">
+                <li><span class="highlight">IMMEDIATE:</span> Complete resource planning for Q3 roadmap</li>
+                <li><span class="highlight">THIS WEEK:</span> Resolve identified technical dependencies</li>
+                <li><span class="highlight">NEXT 2 WEEKS:</span> Finalize Phase 2 customer requirements</li>
+                <li><span class="highlight">ONGOING:</span> Weekly team syncs and stakeholder updates</li>
+            </ul>
+            <div style="margin-top: 40px; padding: 20px; background: #f0f4ff; border-radius: 8px;">
+                <p style="color: #667eea; font-weight: 600; margin-bottom: 10px;">Decision Required:</p>
+                <p style="color: #333;">Leadership approval on resource allocation and timeline adjustments</p>
+            </div>
+            <div class="slide-number">7</div>
+        </div>
+
+        <!-- Slide 8: Q&A -->
+        <div class="slide title">
+            <h1>Questions & Discussion</h1>
+            <div class="subtitle">Open Floor for Leadership Input</div>
+            <div class="slide-number">8</div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button onclick="window.print()">📄 Print / Save as PDF</button>
+        <p class="print-note">💡 Tip: Use browser print function to save as PDF or print slides</p>
+    </div>
+
+    <script>
+        // Set current date
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('currentDate').textContent = today.toLocaleDateString('en-US', options);
+    </script>
+</body>
+</html>
