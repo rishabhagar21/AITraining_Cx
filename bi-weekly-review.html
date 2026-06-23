@@ -39,6 +39,11 @@
             justify-content: center;
             position: relative;
             animation: fadeIn 0.5s ease-in;
+            border-top: 5px solid #667eea;
+        }
+
+        .slide.title {
+            border-top: 5px solid #764ba2;
         }
 
         .slide.active {
@@ -90,6 +95,7 @@
             font-weight: 700;
             border-bottom: 4px solid #667eea;
             padding-bottom: 20px;
+            position: relative;
         }
 
         .content {
@@ -209,12 +215,81 @@
             margin-top: 8px;
         }
 
-        .slide-number {
-            position: absolute;
-            bottom: 20px;
-            right: 30px;
-            color: #999;
+        .project-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px;
+            border-radius: 10px;
+            color: white;
+            border-left: 5px solid #ffd89b;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .project-number {
+            display: inline-block;
+            background: #ffd89b;
+            color: #667eea;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
             font-size: 14px;
+        }
+
+        .project-title {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 8px;
+            letter-spacing: 0.3px;
+        }
+
+        .project-status {
+            font-size: 13px;
+            opacity: 0.95;
+            line-height: 1.5;
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #ffd89b;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.95;
+            font-weight: 600;
         }
 
         .navigation {
@@ -369,64 +444,134 @@
         <!-- Slide 1: Title -->
         <div class="slide title">
             <h1>CX Project Updates</h1>
-            <div class="subtitle">Bi-Weekly Status Review</div>
+            <div class="subtitle">13 Active Initiatives - Bi-Weekly Status</div>
             <div class="date" id="currentDate"></div>
-            <div class="slide-number">1</div>
+            <div class="slide-number">1 / 4</div>
         </div>
 
-        <!-- Slide 2: Projects 1-5 -->
+        <!-- Slide 2: All 13 Projects Overview -->
         <div class="slide">
-            <h2>Active Projects (1-5)</h2>
-            <ul class="bullet-list">
-                <li><span class="section-header">PCA AI CX Plug-in:</span> Collaboration ongoing with PCA BU</li>
-                <li><span class="section-header">Airtel 100G POC:</span> POC activities underway</li>
-                <li><span class="section-header">Ascend PIDs:</span> PID documentation in progress</li>
-                <li><span class="section-header">Rakuten CEE solution:</span> JIRA dashboard refresh initiated</li>
-                <li><span class="section-header">SIFY Production Order:</span> Production order execution started</li>
-            </ul>
-            <div class="slide-number">2</div>
-        </div>
-
-        <!-- Slide 3: Projects 6-10 -->
-        <div class="slide">
-            <h2>Active Projects (6-10)</h2>
-            <ul class="bullet-list">
-                <li><span class="section-header">ANZ PID Closure:</span> PID closure being finalized</li>
-                <li><span class="section-header">RJIO Agentic POC:</span> POC progress shared with team</li>
-                <li><span class="section-header">CX Proposal Agent:</span> Demo to Jaideep team scheduled</li>
-                <li><span class="section-header">AMC Renewals:</span> Renewal discussions in progress (RJIO + Airtel)</li>
-                <li><span class="section-header">AI Learning for CX:</span> AI learning launch planned</li>
-            </ul>
-            <div class="slide-number">3</div>
-        </div>
-
-        <!-- Slide 4: Projects 11-13 -->
-        <div class="slide">
-            <h2>Active Projects (11-13)</h2>
-            <ul class="bullet-list">
-                <li><span class="section-header">Certinia UAT:</span> UAT ongoing for ASEAN PM users</li>
-                <li><span class="section-header">Cisco IQ:</span> Cisco IQ initiatives underway</li>
-                <li><span class="section-header">Multi-Agent Creation:</span> Multi-agent development started</li>
-            </ul>
-            <div style="margin-top: 60px; padding: 20px; background: #f0f4ff; border-radius: 8px;">
-                <p style="color: #667eea; font-weight: 600; margin-bottom: 10px;">📊 Total Active Initiatives: 13</p>
-                <p style="color: #333;">All projects are progressing as planned with continuous team collaboration</p>
+            <h2>Active Initiatives (13 Projects)</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-number">1</div>
+                    <div class="project-title">PCA AI CX Plug-in</div>
+                    <div class="project-status">Collaboration ongoing with PCA BU</div>
+                </div>
+                <div class="project-card">
+                    <div class="project-number">2</div>
+                    <div class="project-title">Airtel 100G POC</div>
+                    <div class="project-status">POC activities underway</div>
+                </div>
+                <div class="project-card">
+                    <div class="project-number">3</div>
+                    <div class="project-title">Ascend PIDs</div>
+                    <div class="project-status">PID documentation in progress</div>
+                </div>
+                <div class="project-card">
+                    <div class="project-number">4</div>
+                    <div class="project-title">Rakuten CEE Solution</div>
+                    <div class="project-status">JIRA dashboard refresh initiated</div>
+                </div>
+                <div class="project-card">
+                    <div class="project-number">5</div>
+                    <div class="project-title">SIFY Production Order</div>
+                    <div class="project-status">Production order execution started</div>
+                </div>
+                <div class="project-card">
+                    <div class="project-number">6</div>
+                    <div class="project-title">ANZ PID Closure</div>
+                    <div class="project-status">PID closure being finalized</div>
+                </div>
             </div>
-            <div class="slide-number">4</div>
+            <div class="slide-number">2 / 4</div>
         </div>
 
-        <!-- Slide 5: Q&A -->
-        <div class="slide title">
-            <h1>Questions & Discussion</h1>
-            <div class="subtitle">Open Floor for Leadership Input</div>
-            <div class="slide-number">5</div>
+        <!-- Slide 3: More Projects -->
+        <div class="slide">
+            <h2>Ongoing Initiatives (7-13 Projects)</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-number">7</div>
+                    <div class="project-title">RJIO Agentic POC</div>
+                    <div class="project-status">POC progress shared with team</div>
+                </div>
+                <div class="project-card">
+                    <div class="project-number">8</div>
+                    <div class="project-title">CX Proposal Agent</div>
+                    <div class="project-status">Demo to Jaideep team scheduled</div>
+                </div>
+                <div class="project-card">
+                    <div class="project-number">9</div>
+                    <div class="project-title">AMC Renewals</div>
+                    <div class="project-status">RJIO + Airtel discussions in progress</div>
+                </div>
+                <div class="project-card">
+                    <div class="project-number">10</div>
+                    <div class="project-title">AI Learning for CX</div>
+                    <div class="project-status">AI learning launch planned</div>
+                </div>
+                <div class="project-card">
+                    <div class="project-number">11</div>
+                    <div class="project-title">Certinia UAT - ASEAN</div>
+                    <div class="project-status">UAT ongoing for PM users</div>
+                </div>
+                <div class="project-card">
+                    <div class="project-number">12</div>
+                    <div class="project-title">Cisco IQ Initiatives</div>
+                    <div class="project-status">Cisco IQ initiatives underway</div>
+                </div>
+            </div>
+            <div style="margin-top: 20px; padding: 20px; background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%); border-radius: 10px; border-left: 5px solid #28a745;">
+                <div class="project-card" style="background: none; border: none; color: #155724; font-weight: 700; margin: 0;">
+                    <span style="font-size: 16px;">+ 1 More: Multi-Agent Creation (development started)</span>
+                </div>
+            </div>
+            <div class="slide-number">3 / 4</div>
+        </div>
+
+        <!-- Slide 4: Summary & Statistics -->
+        <div class="slide">
+            <h2>Project Portfolio Summary</h2>
+            <div class="summary-stats">
+                <div class="stat-box">
+                    <div class="stat-number">13</div>
+                    <div class="stat-label">Total Active Projects</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">On Track & Active</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Key Customers</div>
+                </div>
+            </div>
+            <div style="margin-top: 40px; padding: 30px; background: #f0f4ff; border-radius: 10px; border-left: 5px solid #667eea;">
+                <p style="color: #667eea; font-weight: 700; font-size: 16px; margin-bottom: 15px;">📈 Key Focus Areas</p>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin: 12px 0; color: #333; font-size: 15px; padding-left: 30px; position: relative;">
+                        <span style="position: absolute; left: 0; color: #667eea; font-weight: 700;">✓</span>
+                        Customer Success & POC Completions
+                    </li>
+                    <li style="margin: 12px 0; color: #333; font-size: 15px; padding-left: 30px; position: relative;">
+                        <span style="position: absolute; left: 0; color: #667eea; font-weight: 700;">✓</span>
+                        AI & Agentic Solutions Development
+                    </li>
+                    <li style="margin: 12px 0; color: #333; font-size: 15px; padding-left: 30px; position: relative;">
+                        <span style="position: absolute; left: 0; color: #667eea; font-weight: 700;">✓</span>
+                        Process Automation & Platform Enhancements
+                    </li>
+                </ul>
+            </div>
+            <div class="slide-number">4 / 4</div>
         </div>
     </div>
 
     <div class="navigation">
         <button class="nav-button" id="prevBtn" onclick="previousSlide()">← Previous</button>
         <div class="slide-counter">
-            <span id="currentSlide">1</span> / <span id="totalSlides">5</span>
+            <span id="currentSlide">1</span> / <span id="totalSlides">4</span>
         </div>
         <button class="nav-button" id="nextBtn" onclick="nextSlide()">Next →</button>
         <button class="print-button" onclick="window.print()">🖨️ Print PDF</button>
