@@ -370,6 +370,204 @@
       line-height: 1.4;
     }
 
+    /* ===== Beautified feature components ===== */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 6px;
+    }
+
+    .feature-card {
+      position: relative;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--cisco-blue);
+      border-radius: 12px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 6px 18px rgba(0, 27, 68, 0.07);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 27, 68, 0.14);
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      background: linear-gradient(135deg, #e3f2fd, #d2e4ff);
+      border: 1px solid #bcdcff;
+    }
+
+    .feature-card h3 {
+      margin: 2px 0 0;
+      font-size: 1.02rem;
+      color: #001b44;
+    }
+
+    .feature-card p {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    /* Numbered horizontal stepper */
+    .stepper {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .step {
+      position: relative;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 6px 18px rgba(0, 27, 68, 0.07);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .step:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 27, 68, 0.14);
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0052cc, #001b44);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 10px rgba(0, 82, 204, 0.3);
+    }
+
+    .step h3 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+      color: #001b44;
+    }
+
+    .step p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    /* Metric cards */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .metric-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 6px 18px rgba(0, 27, 68, 0.07);
+      border-left: 5px solid var(--cisco-blue);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 27, 68, 0.14);
+    }
+
+    .metric-card .metric-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .metric-card .metric-emoji { font-size: 1.5rem; }
+
+    .metric-card h3 {
+      margin: 0;
+      font-size: 1.05rem;
+      color: #001b44;
+    }
+
+    .metric-card .metric-pill {
+      display: inline-block;
+      background: #e3f2fd;
+      color: #0052cc;
+      border: 1px solid #bcdcff;
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .metric-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    /* Section lead paragraph */
+    .lead {
+      font-size: 0.98rem;
+      color: var(--muted);
+      max-width: 900px;
+      margin: 0 0 6px;
+      line-height: 1.5;
+    }
+
+    /* Stat strip for AI Champions */
+    .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .stat-pill {
+      background: linear-gradient(135deg, #001b44, #0052cc);
+      color: #fff;
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0, 27, 68, 0.18);
+    }
+
+    .stat-pill .big {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .stat-pill .small {
+      font-size: 0.82rem;
+      opacity: 0.92;
+      line-height: 1.4;
+    }
+
     @media (max-width: 1024px) {
       .slide { padding: 12px; }
       .table-wrap { max-height: calc(100vh - 160px); }
@@ -914,130 +1112,125 @@
         <!-- Slide: A Use-Case Driven Approach -->
         <section class="slide">
           <h2 class="slide-title">A Use-Case Driven Approach</h2>
-          <p class="slide-subtitle">Moving beyond theory to solve actual Customer Experience challenges.</p>
+          <p class="lead">Moving beyond theory to solve actual Customer Experience challenges.</p>
 
-          <div class="rollout-block">
-            <h3>Real-World Scenarios</h3>
-            <p class="slide-subtitle" style="margin: 0;">
-              Training modules are built entirely around actual CX tickets, troubleshooting workflows, and
-              customer interactions. Engineers learn by doing, not just by reading.
-            </p>
-          </div>
-
-          <div class="rollout-block">
-            <h3>Immediate Application</h3>
-            <p class="slide-subtitle" style="margin: 0;">
-              Focus on AI tools and prompts that can be applied on day one. We prioritize workflows that directly
-              reduce Time to Resolution (TTR) and improve response quality.
-            </p>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <div class="feature-icon">🎯</div>
+              <h3>Real-World Scenarios</h3>
+              <p>Training modules are built entirely around actual CX tickets, troubleshooting workflows, and customer interactions. Engineers learn by doing, not just by reading.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">⚡</div>
+              <h3>Immediate Application</h3>
+              <p>Focus on AI tools and prompts that can be applied on day one. We prioritize workflows that directly reduce Time to Resolution (TTR) and improve response quality.</p>
+            </div>
           </div>
         </section>
 
         <!-- Slide: Curriculum Designed from the Field (1/2) -->
         <section class="slide">
           <h2 class="slide-title">Curriculum Designed from the Field (1/2)</h2>
-          <p class="slide-subtitle">How we capture real training needs to ensure relevance.</p>
+          <p class="lead">How we capture real training needs to ensure relevance.</p>
 
-          <div class="rollout-block">
-            <h3>1. Field Gap Analysis</h3>
-            <p class="slide-subtitle" style="margin: 0;">
-              Continuous feedback loops with CX engineers to identify where AI can solve current bottlenecks.
-            </p>
-          </div>
-
-          <div class="rollout-block">
-            <h3>2. Prototype &amp; Test</h3>
-            <p class="slide-subtitle" style="margin: 0;">
-              Subject Matter Experts test AI solutions on historical data to validate effectiveness before training creation.
-            </p>
-          </div>
-
-          <div class="rollout-block">
-            <h3>3. Standardize Workflows</h3>
-            <p class="slide-subtitle" style="margin: 0;">
-              Successful AI applications are codified into repeatable, high-quality training modules.
-            </p>
+          <div class="stepper">
+            <div class="step">
+              <div class="step-num">1</div>
+              <h3>Field Gap Analysis</h3>
+              <p>Continuous feedback loops with CX engineers to identify where AI can solve current bottlenecks.</p>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <h3>Prototype &amp; Test</h3>
+              <p>Subject Matter Experts test AI solutions on historical data to validate effectiveness before training creation.</p>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <h3>Standardize Workflows</h3>
+              <p>Successful AI applications are codified into repeatable, high-quality training modules.</p>
+            </div>
           </div>
         </section>
 
         <!-- Slide: Curriculum Designed from the Field (2/2) -->
         <section class="slide">
           <h2 class="slide-title">Curriculum Designed from the Field (2/2)</h2>
+          <p class="lead">Keeping the curriculum living, current, and globally consistent.</p>
 
-          <div class="rollout-block">
-            <h3>Agile Iteration</h3>
-            <p class="slide-subtitle" style="margin: 0;">
-              The AI landscape changes rapidly. By sourcing curriculum directly from the field, we update our
-              training tracks monthly based on what is actually working for our engineers right now.
-            </p>
-          </div>
-
-          <div class="rollout-block">
-            <h3>Consistent Outcomes</h3>
-            <p class="slide-subtitle" style="margin: 0;">
-              Field-tested curriculum ensures that when an engineer in APJC and an engineer in EMEAR take the
-              training, they deliver the exact same high-quality outcome to the customer.
-            </p>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <div class="feature-icon">🔄</div>
+              <h3>Agile Iteration</h3>
+              <p>The AI landscape changes rapidly. By sourcing curriculum directly from the field, we update our training tracks monthly based on what is actually working for our engineers right now.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">🌐</div>
+              <h3>Consistent Outcomes</h3>
+              <p>Field-tested curriculum ensures that when an engineer in APJC and an engineer in EMEAR take the training, they deliver the exact same high-quality outcome to the customer.</p>
+            </div>
           </div>
         </section>
 
         <!-- Slide: AI Champions Across APJC Theatre -->
         <section class="slide">
           <h2 class="slide-title">AI Champions Across APJC Theatre</h2>
-          <p class="slide-subtitle">A decentralized network driving adoption, mentoring peers, and feeding insights back into the curriculum.</p>
+          <p class="lead">A decentralized network driving adoption, mentoring peers, and feeding insights back into the curriculum.</p>
 
-          <div class="kpi-row">
-            <div class="kpi">
-              <div class="kpi-label">Coverage across major APJC sub-theatres</div>
-              <div class="kpi-value">Regional</div>
+          <div class="stat-strip">
+            <div class="stat-pill">
+              <div class="big">Regional</div>
+              <div class="small">Coverage across major APJC sub-theatres</div>
             </div>
-            <div class="kpi">
-              <div class="kpi-label">Peer mentoring &amp; localized use-case support</div>
-              <div class="kpi-value">1:1</div>
+            <div class="stat-pill">
+              <div class="big">1:1</div>
+              <div class="small">Peer mentoring &amp; localized use-case support</div>
             </div>
-            <div class="kpi">
-              <div class="kpi-label">Primary conduit for field curriculum design</div>
-              <div class="kpi-value">Feedback</div>
+            <div class="stat-pill">
+              <div class="big">Feedback</div>
+              <div class="small">Primary conduit for field curriculum design</div>
             </div>
           </div>
 
-          <div class="rollout-block">
-            <h3>Role of the Champions Network</h3>
-            <ul>
-              <li><strong>Drive adoption</strong> by demonstrating real AI workflows within their own teams.</li>
-              <li><strong>Mentor peers</strong> with 1:1 support tailored to local use-cases and customer contexts.</li>
-              <li><strong>Feed insights back</strong> into the curriculum so training stays grounded in field reality.</li>
-            </ul>
+          <div class="feature-grid" style="margin-top: 16px;">
+            <div class="feature-card">
+              <div class="feature-icon">🚀</div>
+              <h3>Drive Adoption</h3>
+              <p>Champions demonstrate real AI workflows within their own teams to accelerate everyday usage.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">🤝</div>
+              <h3>Mentor Peers</h3>
+              <p>1:1 support tailored to local use-cases and the specific customer contexts of each market.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">💡</div>
+              <h3>Feed Insights Back</h3>
+              <p>Champions channel field learnings into the curriculum so training stays grounded in reality.</p>
+            </div>
           </div>
         </section>
 
         <!-- Slide: Measuring ROI & Effectiveness -->
         <section class="slide">
           <h2 class="slide-title">Measuring ROI &amp; Effectiveness</h2>
-          <p class="slide-subtitle">A data-driven program with continuous tracking of impact across speed, quality, and adoption.</p>
+          <p class="lead">A data-driven program with continuous tracking of impact across speed, quality, and adoption.</p>
 
-          <div class="rollout-block">
-            <h3>Speed</h3>
-            <p class="slide-subtitle" style="margin: 0;">
-              <strong>Metric:</strong> Reduction in Time to Resolution (TTR). Tracking how AI-trained engineers
-              resolve complex cases faster.
-            </p>
-          </div>
-
-          <div class="rollout-block">
-            <h3>Quality</h3>
-            <p class="slide-subtitle" style="margin: 0;">
-              <strong>Metric:</strong> CSAT &amp; Consistency Scores. Ensuring AI usage elevates the customer
-              experience without hallucination risks.
-            </p>
-          </div>
-
-          <div class="rollout-block">
-            <h3>Adoption</h3>
-            <p class="slide-subtitle" style="margin: 0;">
-              <strong>Metric:</strong> Active Daily Usage. Measuring how often trained engineers utilize AI tools
-              in their daily workflows.
-            </p>
+          <div class="metric-grid">
+            <div class="metric-card">
+              <div class="metric-head"><span class="metric-emoji">⏱️</span><h3>Speed</h3></div>
+              <span class="metric-pill">Reduction in TTR</span>
+              <p>Tracking how AI-trained engineers resolve complex cases faster, lowering Time to Resolution.</p>
+            </div>
+            <div class="metric-card">
+              <div class="metric-head"><span class="metric-emoji">⭐</span><h3>Quality</h3></div>
+              <span class="metric-pill">CSAT &amp; Consistency</span>
+              <p>Ensuring AI usage elevates the customer experience without hallucination or accuracy risks.</p>
+            </div>
+            <div class="metric-card">
+              <div class="metric-head"><span class="metric-emoji">📈</span><h3>Adoption</h3></div>
+              <span class="metric-pill">Active Daily Usage</span>
+              <p>Measuring how often trained engineers utilize AI tools within their daily workflows.</p>
+            </div>
           </div>
         </section>
 
