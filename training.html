@@ -1161,6 +1161,57 @@
       .close-grid { grid-template-columns: 1fr; }
       .outcome-metrics { grid-template-columns: repeat(2, 1fr); }
     }
+
+    /* ===== Dynamic / animated icons ===== */
+    .ico {
+      display: inline-block;
+      transform-origin: center;
+    }
+
+    .ico-float { animation: icoFloat 3s ease-in-out infinite; }
+    .ico-pulse { animation: icoPulse 2s ease-in-out infinite; }
+    .ico-bounce { animation: icoBounce 2.4s ease-in-out infinite; }
+    .ico-spin { animation: icoSpin 6s linear infinite; }
+    .ico-swing { animation: icoSwing 3s ease-in-out infinite; transform-origin: top center; }
+    .ico-shield { animation: icoShield 2.6s ease-in-out infinite; }
+    .ico-launch { animation: icoLaunch 2.6s ease-in-out infinite; }
+
+    @keyframes icoFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    @keyframes icoPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.18); }
+    }
+    @keyframes icoBounce {
+      0%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-6px); }
+      50% { transform: translateY(0); }
+      65% { transform: translateY(-3px); }
+    }
+    @keyframes icoSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes icoSwing {
+      0%, 100% { transform: rotate(-8deg); }
+      50% { transform: rotate(8deg); }
+    }
+    @keyframes icoShield {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(0,188,235,0)); }
+      50% { transform: scale(1.12); filter: drop-shadow(0 0 6px rgba(0,188,235,0.6)); }
+    }
+    @keyframes icoLaunch {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      40% { transform: translate(3px, -5px) rotate(8deg); }
+      70% { transform: translate(1px, -2px) rotate(3deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ico-float, .ico-pulse, .ico-bounce, .ico-spin,
+      .ico-swing, .ico-shield, .ico-launch { animation: none; }
+    }
   </style>
 </head>
 <body>
@@ -1200,15 +1251,15 @@
 
           <div class="pillar-grid">
             <div class="pillar">
-              <h4>📊 The Gap</h4>
+              <h4><span class="ico ico-float">📊</span> The Gap</h4>
               <p>High adoption, lower readiness — strong daily AI usage, yet fewer than half are formally trained.</p>
             </div>
             <div class="pillar">
-              <h4>🚀 The Opportunity</h4>
+              <h4><span class="ico ico-launch">🚀</span> The Opportunity</h4>
               <p>AI fluency directly lifts delivery speed, automation quality, and customer outcomes across every CX role.</p>
             </div>
             <div class="pillar">
-              <h4>🛡️ The Guardrails</h4>
+              <h4><span class="ico ico-shield">🛡️</span> The Guardrails</h4>
               <p>A governed program ensures responsible, secure AI use and one consistent skill baseline across APJC.</p>
             </div>
           </div>
@@ -1222,7 +1273,7 @@
           </div>
 
           <div class="ask-banner">
-            <span class="ab-icon">✅</span>
+            <span class="ab-icon ico ico-bounce">✅</span>
             <p><strong>The ask of leadership:</strong> approve the proposed curriculum, endorse the 14-day completion policy with manager escalation, and sponsor protected enablement time so the team closes the gap on schedule. You can approve or comment on each course directly within this deck.</p>
           </div>
         </section>
@@ -1755,7 +1806,7 @@
 
           <div class="close-grid">
             <div class="close-card takeaways">
-              <h3>📌 Why This Matters</h3>
+              <h3><span class="ico ico-swing">📌</span> Why This Matters</h3>
               <ul class="check-list">
                 <li><strong>Close the readiness gap:</strong> 259/261 use AI, only 108 are trained — this program converts adoption into capability.</li>
                 <li><strong>Field-driven &amp; role-based:</strong> an integrated learning engine and a 30-60-90 curriculum mapped to every CX role.</li>
@@ -1764,7 +1815,7 @@
               </ul>
             </div>
             <div class="close-card nextsteps">
-              <h3>🚀 What We Need From You</h3>
+              <h3><span class="ico ico-launch">🚀</span> What We Need From You</h3>
               <ol class="num-list">
                 <li><strong>Approve</strong> the curriculum and the 14-day completion policy with manager escalation.</li>
                 <li><strong>Sponsor</strong> protected enablement time to complete MUST HAVE modules on schedule.</li>
@@ -1775,7 +1826,7 @@
           </div>
 
           <div class="outcome-band">
-            <h3>The 90-Day Outcome</h3>
+            <h3><span class="ico ico-pulse">🎯</span> The 90-Day Outcome</h3>
             <div class="outcome-metrics">
               <div class="om">
                 <div class="om-num">100%</div>
