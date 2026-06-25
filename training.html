@@ -1,1056 +1,313 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Training CX SP - Slider Presentation</title>
-  <style>
-    :root {
-      --bg: #f5f5f5;
-      --panel: #ffffff;
-      --text: #222222;
-      --muted: #666666;
-      --line: #e0e0e0;
-      --blue-accent: #0052cc;
-      --red-accent: #d32f2f;
-      --light-bg: #fafafa;
-      --cisco-blue: #0052cc;
-      --cisco-dark: #001b44;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Training for CX - Integrated Approach</title>
+    
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Strict Cisco Brand Theme */
+        :root {
+            --cisco-dark-blue: #0d274d;
+            --cisco-cyan: #00bceb;
+            --cisco-white: #ffffff;
+            --cisco-dark-text: #333333;
+        }
 
-    * { box-sizing: border-box; }
+        body, .reveal {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--cisco-dark-blue);
+            color: var(--cisco-white);
+        }
 
-    html, body {
-      margin: 0;
-      height: 100%;
-      font-family: "Segoe UI", "Avenir Next", "Helvetica Neue", sans-serif;
-      color: var(--text);
-      background: linear-gradient(135deg, #e3f2fd 0%, #f5f5f5 100%);
-      overflow: hidden;
-    }
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+            font-family: 'Inter', sans-serif;
+            color: var(--cisco-white);
+            font-weight: 700;
+            text-transform: none;
+        }
 
-    .deck {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+        .reveal h1 { font-size: 2.5em; }
+        .reveal h2 { font-size: 1.8em; margin-bottom: 1em; }
+        
+        .accent-text { color: var(--cisco-cyan); }
+        .accent-border { border-bottom: 4px solid var(--cisco-cyan); display: inline-block; padding-bottom: 10px; }
 
-    .header {
-      background: linear-gradient(90deg, #001b44, #0052cc);
-      color: #fff;
-      padding: 12px 16px;
-      border-bottom: 2px solid #001b44;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
+        /* Reusable Components */
+        .card {
+            background-color: var(--cisco-white);
+            color: var(--cisco-dark-text);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-align: left;
+            border-top: 4px solid var(--cisco-cyan);
+        }
 
-    .header h1 {
-      margin: 0;
-      font-size: 1.28rem;
-      font-weight: 700;
-    }
+        .card h3 {
+            color: var(--cisco-dark-blue);
+            font-size: 1.3em;
+            margin-top: 0;
+        }
 
-    .header p {
-      margin: 2px 0 0;
-      font-size: 0.84rem;
-      opacity: 0.92;
-    }
+        .card p {
+            font-size: 0.9em;
+            line-height: 1.5;
+            margin: 0;
+        }
 
-    .slide-container {
-      position: relative;
-      flex: 1;
-      overflow: hidden;
-      background: var(--bg);
-    }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            width: 100%;
+        }
 
-    .slides {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      transition: transform 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+        }
 
-    .slide {
-      min-width: 100%;
-      padding: 16px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+        .stat-tile {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--cisco-cyan);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
 
-    .slide.hidden {
-      visibility: hidden;
-    }
+        .stat-tile .number {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--cisco-cyan);
+            margin-bottom: 10px;
+        }
 
-    .slide-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #0052cc;
-      margin: 0 0 8px;
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 8px;
-    }
+        .stat-tile .label {
+            font-size: 0.9em;
+            font-weight: 400;
+        }
 
-    .slide-subtitle {
-      font-size: 0.92rem;
-      color: var(--muted);
-      margin: 0 0 10px;
-    }
+        .badge {
+            background-color: var(--cisco-cyan);
+            color: var(--cisco-dark-blue);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.6em;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
 
-    .table-wrap {
-      overflow: auto;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-      max-height: calc(100vh - 180px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    }
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 1400px;
-      font-size: 0.9rem;
-    }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--cisco-cyan);
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            margin-left: -2px;
+        }
 
-    thead tr {
-      background-color: var(--cisco-dark);
-      color: #ffffff;
-    }
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 100%;
+            box-sizing: border-box;
+        }
 
-    th {
-      padding: 12px;
-      border: 1px solid #ddd;
-      text-align: left;
-      font-weight: 600;
-      position: sticky;
-      top: 0;
-      background-color: var(--cisco-dark);
-      z-index: 10;
-    }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            right: auto;
+            left: 12px;
+            background-color: var(--cisco-white);
+            border: 4px solid var(--cisco-cyan);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
 
-    tbody tr:nth-child(even) {
-      background-color: var(--light-bg);
-    }
-
-    tbody tr:hover {
-      background-color: #f0f4f8;
-    }
-
-    td {
-      padding: 12px;
-      border: 1px solid #ddd;
-      vertical-align: top;
-    }
-
-    input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      cursor: pointer;
-      accent-color: #0052cc;
-    }
-
-    select, textarea {
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      padding: 6px 8px;
-      font-family: inherit;
-      font-size: 0.9rem;
-      color: var(--text);
-      background: #fff;
-    }
-
-    select {
-      cursor: pointer;
-      min-width: 100px;
-    }
-
-    textarea {
-      min-width: 150px;
-      min-height: 40px;
-      resize: vertical;
-    }
-
-    .save-btn {
-      background: #0052cc;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      padding: 6px 14px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 160ms ease;
-    }
-
-    .save-btn:hover {
-      background: #003a99;
-      box-shadow: 0 2px 8px rgba(0, 82, 204, 0.3);
-    }
-
-    .save-btn:active {
-      background: #002966;
-    }
-
-    .timeline {
-      font-weight: 700;
-      color: #0052cc;
-      min-width: 70px;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-weight: 700;
-      font-size: 0.85rem;
-    }
-
-    .badge.blue {
-      background-color: #e3f2fd;
-      color: #0052cc;
-      border: 1px solid #0052cc;
-    }
-
-    .badge.red {
-      background-color: #ffebee;
-      color: #d32f2f;
-      border: 1px solid #d32f2f;
-    }
-
-    .badge.both {
-      background-color: #f3e5f5;
-      color: #6a1b9a;
-      border: 1px solid #6a1b9a;
-    }
-
-    .priority {
-      font-weight: 700;
-      padding: 4px 8px;
-      border-radius: 4px;
-      display: inline-block;
-      font-size: 0.85rem;
-    }
-
-    .priority.must {
-      background: #ffebee;
-      color: #d32f2f;
-    }
-
-    .priority.good {
-      background: #fff3e0;
-      color: #e65100;
-    }
-
-    a {
-      color: #0066cc;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .nav {
-      position: fixed;
-      left: 50%;
-      bottom: 14px;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 9px 14px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-      z-index: 50;
-      backdrop-filter: blur(4px);
-    }
-
-    .btn {
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      background: #fff;
-      color: var(--text);
-      padding: 6px 10px;
-      font-size: 0.84rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 160ms ease;
-    }
-
-    .btn:hover:not(:disabled) {
-      background: #f0f4f8;
-      border-color: var(--blue-accent);
-    }
-
-    .btn:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
-
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #b0bec5;
-      cursor: pointer;
-      transition: all 160ms ease;
-    }
-
-    .dot:hover {
-      background: #546e7a;
-    }
-
-    .dot.active {
-      background: #0052cc;
-      width: 24px;
-      border-radius: 4px;
-    }
-
-    .slide-count {
-      font-size: 0.82rem;
-      color: var(--muted);
-      font-weight: 600;
-      min-width: 50px;
-      text-align: center;
-    }
-
-    .kpi-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 10px;
-      margin: 10px 0;
-    }
-
-    .kpi {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 10px;
-      text-align: center;
-    }
-
-    .kpi-label {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    .kpi-value {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #0052cc;
-    }
-
-    .rollout-block {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 12px;
-      margin-top: 6px;
-    }
-
-    .rollout-block h3 {
-      margin: 0 0 8px;
-      font-size: 1rem;
-      color: #001b44;
-    }
-
-    .rollout-block ul {
-      margin: 0;
-      padding-left: 18px;
-    }
-
-    .rollout-block li {
-      margin-bottom: 8px;
-      line-height: 1.4;
-    }
-
-    @media (max-width: 1024px) {
-      .slide { padding: 12px; }
-      .table-wrap { max-height: calc(100vh - 160px); }
-      table { font-size: 0.8rem; }
-      th, td { padding: 8px; }
-      .header h1 { font-size: 1.1rem; }
-    }
-
-    @media (max-width: 768px) {
-      .nav { gap: 6px; padding: 7px 10px; }
-      .btn { padding: 5px 8px; font-size: 0.78rem; }
-      .dot { width: 6px; height: 6px; }
-      .dot.active { width: 16px; }
-    }
-  </style>
+        .timeline-content {
+            background-color: var(--cisco-white);
+            color: var(--cisco-dark-text);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .timeline-content h4 {
+            color: var(--cisco-dark-blue);
+            margin: 0 0 10px 0;
+            font-size: 1.1em;
+        }
+        
+        .timeline-content p {
+            margin: 0;
+            font-size: 0.85em;
+        }
+    </style>
 </head>
 <body>
-  <div class="deck">
-    <div class="header">
-      <h1>AI Training Rollout Plan - CX SP</h1>
-      <p>30-60-90 Day Enablement Roadmap | Full Training Table Details</p>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Slide 1: Hero -->
+            <section>
+                <h1 class="accent-border">AI Training for CX</h1>
+                <h3>An Integrated & Extended Approach</h3>
+                <p style="font-size: 1.2em; margin-top: 30px; font-weight: 300;">
+                    Meeting real training needs to deliver <span class="accent-text">fast, high-quality & consistent</span> outcomes.
+                </p>
+            </section>
+
+            <!-- Slide 2: Use Case Driven -->
+            <section>
+                <h2>A <span class="accent-text">Use-Case Driven</span> Approach</h2>
+                <p style="margin-bottom: 40px; font-size: 0.9em;">Moving beyond theory to solve actual Customer Experience challenges.</p>
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>Real-World Scenarios</h3>
+                        <p>Training modules are built entirely around actual CX tickets, troubleshooting workflows, and customer interactions. Engineers learn by doing, not just by reading.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Immediate Application</h3>
+                        <p>Focus on AI tools and prompts that can be applied on day one. We prioritize workflows that directly reduce Time to Resolution (TTR) and improve response quality.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 3: Curriculum Design (Part 1) -->
+            <section>
+                <h2>Curriculum Designed <span class="accent-text">from the Field</span> (1/2)</h2>
+                <p style="margin-bottom: 30px; font-size: 0.9em;">How we capture real training needs to ensure relevance.</p>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>1. Field Gap Analysis</h4>
+                            <p>Continuous feedback loops with CX engineers to identify where AI can solve current bottlenecks.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>2. Prototype & Test</h4>
+                            <p>Subject Matter Experts test AI solutions on historical data to validate effectiveness before training creation.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>3. Standardize Workflows</h4>
+                            <p>Successful AI applications are codified into repeatable, high-quality training modules.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 4: Curriculum Design (Part 2) -->
+            <section>
+                <h2>Curriculum Designed <span class="accent-text">from the Field</span> (2/2)</h2>
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>Agile Iteration</h3>
+                        <p>The AI landscape changes rapidly. By sourcing curriculum directly from the field, we update our training tracks monthly based on what is actually working for our engineers right now.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Consistent Outcomes</h3>
+                        <p>Field-tested curriculum ensures that when an engineer in APJC and an engineer in EMEAR take the training, they deliver the exact same high-quality outcome to the customer.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 5: AI Champions -->
+            <section>
+                <h2><span class="accent-text">AI Champions</span> Across Theatre</h2>
+                <p style="margin-bottom: 40px;">A decentralized network driving adoption, mentoring peers, and feeding insights back into the curriculum.</p>
+                <div class="grid-3">
+                    <div class="stat-tile">
+                        <div class="number">Global</div>
+                        <div class="label">Coverage across all major theatres (Americas, EMEAR, APJC)</div>
+                    </div>
+                    <div class="stat-tile">
+                        <div class="number">1:1</div>
+                        <div class="label">Peer mentoring and localized use-case support</div>
+                    </div>
+                    <div class="stat-tile">
+                        <div class="number">Feedback</div>
+                        <div class="label">Champions act as the primary conduit for field curriculum design</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 6: ROI & Effectiveness -->
+            <section>
+                <h2>Measuring <span class="accent-text">ROI & Effectiveness</span></h2>
+                <span class="badge">Data-Driven Program</span>
+                <span class="badge">Continuous Tracking</span>
+                <div class="grid-3" style="margin-top: 20px;">
+                    <div class="card">
+                        <h3>Speed</h3>
+                        <p><strong>Metric:</strong> Reduction in Time to Resolution (TTR).<br><br>Tracking how AI-trained engineers resolve complex cases faster.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Quality</h3>
+                        <p><strong>Metric:</strong> CSAT & Consistency Scores.<br><br>Ensuring AI usage elevates the customer experience without hallucination risks.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Adoption</h3>
+                        <p><strong>Metric:</strong> Active Daily Usage.<br><br>Measuring how often trained engineers utilize AI tools in their daily workflows.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 7: Closing -->
+            <section>
+                <h1 class="accent-border">Next Steps</h1>
+                <div class="grid-2" style="margin-top: 40px;">
+                    <div class="card">
+                        <h3>For Leadership</h3>
+                        <p>Review the initial ROI metrics from the pilot groups and nominate AI Champions for your respective theatres.</p>
+                    </div>
+                    <div class="card">
+                        <h3>For the Field</h3>
+                        <p>Submit your most complex use-cases to the curriculum design team to shape the next wave of training modules.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
     </div>
 
-    <div class="slide-container">
-      <div class="slides" id="slides">
-        <!-- Slide 1: Executive Introduction -->
-        <section class="slide">
-          <h2 class="slide-title">Executive Introduction</h2>
-          <p class="slide-subtitle">Prepared for the Cisco CX SP Leadership Team &nbsp;|&nbsp; AI Enablement Program &nbsp;|&nbsp; 30-60-90 Day Roadmap</p>
-
-          <div class="rollout-block">
-            <h3>Purpose of This Presentation</h3>
-            <p class="slide-subtitle" style="margin: 0;">
-              This briefing presents a structured 30-60-90 day AI enablement roadmap for the CX SP organization.
-              Our goal is to convert the team's already-high AI adoption into measurable, role-based capability
-              through a governed training program with clear leadership visibility, accountability, and decision points.
-            </p>
-          </div>
-
-          <div class="rollout-block">
-            <h3>Why Now — The Business Case</h3>
-            <ul>
-              <li><strong>Adoption is ahead of capability:</strong> 259 of 261 team members already use AI, with strong daily usage — yet only 108 are formally AI-trained, leaving a clear readiness gap.</li>
-              <li><strong>Competitive imperative:</strong> AI fluency directly impacts delivery speed, automation quality, and customer outcomes across Network Engineering, PM, SDM, and Solution Architecture.</li>
-              <li><strong>Governance &amp; risk:</strong> A structured program ensures responsible, secure AI use and a consistent skill baseline across every CX role.</li>
-            </ul>
-          </div>
-
-          <div class="rollout-block">
-            <h3>What You Will See Today</h3>
-            <ul>
-              <li><strong>Training Overview &amp; Survey Findings</strong> — adoption vs. completion data and program KPIs.</li>
-              <li><strong>Rollout Plan</strong> — automated assignment, reminders, escalation, and bi-weekly leadership reporting.</li>
-              <li><strong>Curriculum by Phase</strong> — 30, 60, and 90-day MUST HAVE and GOOD TO HAVE courses, mapped by role.</li>
-              <li><strong>Leadership Review</strong> — approve or comment on each course directly within this deck.</li>
-            </ul>
-          </div>
-
-          <div class="rollout-block">
-            <h3>The Ask of Leadership</h3>
-            <p class="slide-subtitle" style="margin: 0;">
-              Review and approve the proposed curriculum, endorse the 14-day completion policy with manager
-              escalation, and sponsor protected enablement time so the team can close the training gap on schedule.
-            </p>
-          </div>
-
-          <p class="slide-subtitle" style="margin-top: 8px;"><strong>Navigation:</strong> Use the Previous / Next buttons, the arrow keys, or swipe to move through the deck.</p>
-        </section>
-
-        <!-- Slide 2: Overview -->
-        <section class="slide">
-          <h2 class="slide-title">Training Overview</h2>
-          <p class="slide-subtitle">30-60-90 day AI enablement plan with role-specific curriculum and resource mapping.</p>
-
-          <div class="kpi-row">
-            <div class="kpi">
-              <div class="kpi-label">Total Courses</div>
-              <div class="kpi-value">15</div>
-            </div>
-            <div class="kpi">
-              <div class="kpi-label">Timelines</div>
-              <div class="kpi-value">3</div>
-            </div>
-            <div class="kpi">
-              <div class="kpi-label">Target Roles</div>
-              <div class="kpi-value">5</div>
-            </div>
-            <div class="kpi">
-              <div class="kpi-label">MUST HAVE</div>
-              <div class="kpi-value">10</div>
-            </div>
-            <div class="kpi">
-              <div class="kpi-label">GOOD TO HAVE</div>
-              <div class="kpi-value">5</div>
-            </div>
-          </div>
-
-          <div class="rollout-block">
-            <h3>Key Findings From Survey Analysis</h3>
-            <ul>
-              <li><strong>Adoption is very high:</strong> 259 out of 261 are already using AI, with strong daily usage behavior.</li>
-              <li><strong>Training completion is the core gap:</strong> only 108 out of 261 marked AI Trained, so rollout depth is still behind adoption.</li>
-            </ul>
-          </div>
-
-          <p class="slide-subtitle" style="margin-top: 14px;"><strong>Navigation:</strong> Use Previous/Next buttons or arrow keys to browse slides. Each slide shows course details for one timeline phase.</p>
-        </section>
-
-        <!-- Slide 2: Rollout Plan -->
-        <section class="slide">
-          <h2 class="slide-title">AI Training Rollout Plan</h2>
-          <p class="slide-subtitle">30-60-90 day enablement roadmap for CX teams with assignment tracking, escalation, and leadership visibility.</p>
-          <p class="slide-subtitle"><a href="https://rishabhagar21.github.io/AITraining_Cx/#training-table" target="_blank">Go to Training Table</a></p>
-
-          <div class="rollout-block">
-            <h3>Why We Are Building This Table</h3>
-            <p class="slide-subtitle" style="margin: 0;">
-              The survey shows strong AI usage but weaker formal training completion. This table is used to
-              track assignment, completion, reminders, escalation, and leadership visibility so adoption is
-              converted into measurable capability.
-            </p>
-          </div>
-
-          <div class="rollout-block">
-            <h3>Slide 1: Automated Assignment & Initial Tracking (Days 1-7)</h3>
-            <ul>
-              <li><strong>Trigger & Kickoff:</strong> Upon curriculum publication, the platform dynamically assigns "MUST HAVE" modules based on the user's CX Role (Network Eng, PM, SDM, Sol Arch) with a strict 14-day due date.</li>
-              <li><strong>Week 1 Gentle Nudge:</strong> On Day 7, if the user has not reached 100% completion, the platform automatically sends <strong>Reminder 1</strong> directly to the individual to keep them on track.</li>
-            </ul>
-          </div>
-
-          <div class="rollout-block">
-            <h3>Slide 2: Escalation & Leadership Reporting (Day 14+)</h3>
-            <ul>
-              <li><strong>Due Date Escalation:</strong> On Day 14, if "MUST HAVE" modules remain incomplete, the platform sends <strong>Reminder 2</strong> to the individual <strong>and CCs their Direct Manager</strong> to drive closure.</li>
-              <li><strong>Bi-Weekly Visibility:</strong> The platform automatically generates and distributes a bi-weekly progress report to CX Leadership and Department Managers, tracking completion rates, overdue assignments, and voluntary enrollment in "GOOD TO HAVE" modules.</li>
-            </ul>
-          </div>
-        </section>
-
-        <!-- Slide 3: 30-Day Courses -->
-        <section class="slide">
-          <h2 class="slide-title">30-Day Courses</h2>
-          <p class="slide-subtitle">Phase 1: Foundation & Quick Wins | MUST HAVE courses include GitHub Copilot, AI Fundamentals, and Prompt Engineering.</p>
-
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Timeline</th>
-                  <th>Topic/Skill</th>
-                  <th>About Training</th>
-                  <th>Target CX Roles</th>
-                  <th>Badge Access</th>
-                  <th>Classification</th>
-                  <th>Resource</th>
-                  <th>Leadership Decision</th>
-                  <th>Leadership Comments</th>
-                  <th>Save Review</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="timeline"><strong>30-Day</strong></td>
-                  <td><strong>AI Fundamentals & Business Value</strong></td>
-                  <td>Foundational AI business value and use cases</td>
-                  <td>Project Management, Service Delivery Management, Solution Architecture</td>
-                  <td><span class="badge blue">Blue</span></td>
-                  <td><span class="priority must">MUST HAVE</span></td>
-                  <td><a href="https://u.cisco.com/" target="_blank">Cisco AI Business Practitioner (AIBIZ) on Cisco U.</a></td>
-                  <td>
-                    <select class="leadership-decision">
-                      <option value="approved" selected>Approved</option>
-                      <option value="reject">Reject</option>
-                    </select>
-                  </td>
-                  <td><textarea class="leadership-comment" placeholder="Add comments..."></textarea></td>
-                  <td><button class="save-btn" onclick="saveReview(this)">Save</button></td>
-                </tr>
-                <tr>
-                  <td class="timeline"><strong>30-Day</strong></td>
-                  <td><strong>AI Fundamentals & Business Value</strong></td>
-                  <td>Foundational AI concepts and business value</td>
-                  <td>Project Management, Service Delivery Management, Solution Architecture</td>
-                  <td><span class="badge red">Red</span></td>
-                  <td><span class="priority must">MUST HAVE</span></td>
-                  <td><a href="https://www.coursera.org/learn/ai-for-everyone" target="_blank">Coursera: AI For Everyone</a> / <a href="https://learn.microsoft.com/en-us/training/paths/get-started-with-artificial-intelligence-on-azure/" target="_blank">MS Learn: AI Fundamentals</a></td>
-                  <td>
-                    <select class="leadership-decision">
-                      <option value="approved" selected>Approved</option>
-                      <option value="reject">Reject</option>
-                    </select>
-                  </td>
-                  <td><textarea class="leadership-comment" placeholder="Add comments..."></textarea></td>
-                  <td><button class="save-btn" onclick="saveReview(this)">Save</button></td>
-                </tr>
-                <tr style="background-color: #f9f9f9;">
-                  <td class="timeline"><strong>30-Day</strong></td>
-                  <td><strong>Introduction to Modern AI</strong></td>
-                  <td>Overview of modern AI technologies</td>
-                  <td>All CX Roles</td>
-                  <td><span class="badge both">Blue & Red</span></td>
-                  <td><span class="priority good">GOOD TO HAVE</span></td>
-                  <td><a href="https://www.netacad.com/" target="_blank">Cisco Networking Academy</a> (Free & Public)</td>
-                  <td>
-                    <select class="leadership-decision">
-                      <option value="approved" selected>Approved</option>
-                      <option value="reject">Reject</option>
-                    </select>
-                  </td>
-                  <td><textarea class="leadership-comment" placeholder="Add comments..."></textarea></td>
-                  <td><button class="save-btn" onclick="saveReview(this)">Save</button></td>
-                </tr>
-                <tr>
-                  <td class="timeline"><strong>30-Day</strong></td>
-                  <td><strong>GitHub Copilot Setup & Basics</strong></td>
-                  <td>Hands-on setup and usage of GitHub Copilot</td>
-                  <td>All CX Roles</td>
-                  <td><span class="badge both">Blue & Red</span></td>
-                  <td><span class="priority must">MUST HAVE</span></td>
-                  <td>BB: Cisco HelpZone (KB0075230) / RB: <a href="https://learn.microsoft.com/" target="_blank">MS Learn</a></td>
-                  <td>
-                    <select class="leadership-decision">
-                      <option value="approved" selected>Approved</option>
-                      <option value="reject">Reject</option>
-                    </select>
-                  </td>
-                  <td><textarea class="leadership-comment" placeholder="Add comments..."></textarea></td>
-                  <td><button class="save-btn" onclick="saveReview(this)">Save</button></td>
-                </tr>
-                <tr style="background-color: #f9f9f9;">
-                  <td class="timeline"><strong>30-Day</strong></td>
-                  <td><strong>AI Pair Programming & Prompt Engineering</strong></td>
-                  <td>Practical pair programming and prompt techniques</td>
-                  <td>All CX Roles</td>
-                  <td><span class="badge both">Blue & Red</span></td>
-                  <td><span class="priority must">MUST HAVE</span></td>
-                  <td>BB: Cisco SharePoint (DEVNET-2159) / RB: <a href="https://github.com/skills" target="_blank">GitHub Skills</a></td>
-                  <td>
-                    <select class="leadership-decision">
-                      <option value="approved" selected>Approved</option>
-                      <option value="reject">Reject</option>
-                    </select>
-                  </td>
-                  <td><textarea class="leadership-comment" placeholder="Add comments..."></textarea></td>
-                  <td><button class="save-btn" onclick="saveReview(this)">Save</button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- Slide 4: 60-Day Courses -->
-        <section class="slide">
-          <h2 class="slide-title">60-Day Courses</h2>
-          <p class="slide-subtitle">Phase 2: Infrastructure & Advanced Topics | Network Automation, RAG/API, and Infrastructure automation focus.</p>
-
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Timeline</th>
-                  <th>Topic/Skill</th>
-                  <th>About Training</th>
-                  <th>Target CX Roles</th>
-                  <th>Badge Access</th>
-                  <th>Classification</th>
-                  <th>Resource</th>
-                  <th>Leadership Decision</th>
-                  <th>Leadership Comments</th>
-                  <th>Save Review</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="timeline"><strong>60-Day</strong></td>
-                  <td><strong>AI Infrastructure & Automation</strong></td>
-                  <td>Infrastructure provisioning and automation with AI</td>
-                  <td>Network Engineering, Solution Architecture</td>
-                  <td><span class="badge blue">Blue</span></td>
-                  <td><span class="priority must">MUST HAVE</span></td>
-                  <td>AI Infrastructure Automation Skills Package (via LadderUp on Cisco U.)</td>
-                  <td>
-                    <select class="leadership-decision">
-                      <option value="approved" selected>Approved</option>
-                      <option value="reject">Reject</option>
-                    </select>
-                  </td>
-                  <td><textarea class="leadership-comment" placeholder="Add comments..."></textarea></td>
-                  <td><button class="save-btn" onclick="saveReview(this)">Save</button></td>
-                </tr>
-                <tr style="background-color: #f9f9f9;">
-                  <td class="timeline"><strong>60-Day</strong></td>
-                  <td><strong>AI Infrastructure & Automation</strong></td>
-                  <td>ML infrastructure and automation training</td>
-                  <td>Network Engineering, Solution Architecture</td>
-                  <td><span class="badge red">Red</span></td>
-                  <td><span class="priority must">MUST HAVE</span></td>
-                  <td><a href="https://explore.skillbuilder.aws/learn/public/learning_plan/view/82/machine-learning-learning-plan" target="_blank">AWS Skill Builder: Machine Learning</a> (Free Tier)</td>
-                  <td>
-                    <select class="leadership-decision">
-                      <option value="approved" selected>Approved</option>
-                      <option value="reject">Reject</option>
-                    </select>
-                  </td>
-                  <td><textarea class="leadership-comment" placeholder="Add comments..."></textarea></td>
-                  <td><button class="save-btn" onclick="saveReview(this)">Save</button></td>
-                </tr>
-                <tr>
-                  <td class="timeline"><strong>60-Day</strong></td>
-                  <td><strong>ChatGPT API & RAG</strong></td>
-                  <td>ChatGPT API integration and Retrieval-Augmented Generation</td>
-                  <td>Network Engineering, Solution Architecture</td>
-                  <td><span class="badge blue">Blue</span></td>
-                  <td><span class="priority good">GOOD TO HAVE</span></td>
-                  <td><a href="https://u.cisco.com/learn/artificial-intelligence" target="_blank">Cisco U. AI Hub Tutorials</a></td>
-                  <td>
-                    <select class="leadership-decision">
-                      <option value="approved" selected>Approved</option>
-                      <option value="reject">Reject</option>
-                    </select>
-                  </td>
-                  <td><textarea class="leadership-comment" placeholder="Add comments..."></textarea></td>
-                  <td><button class="save-btn" onclick="saveReview(this)">Save</button></td>
-                </tr>
-                <tr style="background-color: #f9f9f9;">
-                  <td class="timeline"><strong>60-Day</strong></td>
-                  <td><strong>ChatGPT API & RAG</strong></td>
-                  <td>Prompt engineering with ChatGPT</td>
-                  <td>Network Engineering, Solution Architecture</td>
-                  <td><span class="badge red">Red</span></td>
-                  <td><span class="priority good">GOOD TO HAVE</span></td>
-                  <td><a href="https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/" target="_blank">DeepLearning.AI: Prompt Engineering</a> (Free)</td>
-                  <td>
-                    <select class="leadership-decision">
-                      <option value="approved" selected>Approved</option>
-                      <option value="reject">Reject</option>
-                    </select>
-                  </td>
-                  <td><textarea class="leadership-comment" placeholder="Add comments..."></textarea></td>
-                  <td><button class="save-btn" onclick="saveReview(this)">Save</button></td>
-                </tr>
-                <tr>
-                  <td class="timeline"><strong>60-Day</strong></td>
-                  <td><strong>Network Automation with Copilot</strong></td>
-                  <td>Network automation using Copilot AI tools</td>
-                  <td>Network Engineering, Solution Architecture</td>
-                  <td><span class="badge both">Blue & Red</span></td>
-                  <td><span class="priority must">MUST HAVE</span></td>
-                  <td>BB: Cisco SharePoint (BRKOPS-1726) / RB: Copilot Bootcamp</td>
-                  <td>
-                    <select class="leadership-decision">
-                      <option value="approved" selected>Approved</option>
-                      <option value="reject">Reject</option>
-                    </select>
-                  </td>
-                  <td><textarea class="leadership-comment" placeholder="Add comments..."></textarea></td>
-                  <td><button class="save-btn" onclick="saveReview(this)">Save</button></td>
-                </tr>
-                <tr style="background-color: #f9f9f9;">
-                  <td class="timeline"><strong>60-Day</strong></td>
-                  <td><strong>Copilot CLI & Chat for Troubleshooting</strong></td>
-                  <td>Using Copilot CLI and chat for network troubleshooting</td>
-                  <td>Network Engineering, Solution Architecture</td>
-                  <td><span class="badge both">Blue & Red</span></td>
-                  <td><span class="priority good">GOOD TO HAVE</span></td>
-                  <td>BB & RB: <a href="https://learn.microsoft.com/" target="_blank">MS Learn</a></td>
-                  <td>
-                    <select class="leadership-decision">
-                      <option value="approved" selected>Approved</option>
-                      <option value="reject">Reject</option>
-                    </select>
-                  </td>
-                  <td><textarea class="leadership-comment" placeholder="Add comments..."></textarea></td>
-                  <td><button class="save-btn" onclick="saveReview(this)">Save</button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- Slide 5: 90-Day Courses Part 1 -->
-        <section class="slide">
-          <h2 class="slide-title">90-Day Courses - Part 1</h2>
-          <p class="slide-subtitle">Phase 3: Production & Workflows | Technical Implementation, Webex Innovation, and Security focus.</p>
-
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Timeline</th>
-                  <th>Topic/Skill</th>
-                  <th>About Training</th>
-                  <th>Target CX Roles</th>
-                  <th>Badge Access</th>
-                  <th>Classification</th>
-                  <th>Resource</th>
-                  <th>Leadership Decision</th>
-                  <th>Leadership Comments</th>
-                  <th>Save Review</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="timeline"><strong>90-Day</strong></td>
-                  <td><strong>AI Technical Implementation & Workflows</strong></td>
-                  <td>Production-level AI implementation and workflow design</td>
-                  <td>Network Engineering, Solution Architecture</td>
-                  <td><span class="badge blue">Blue</span></td>
-                  <td><span class="priority must">MUST HAVE</span></td>
-                  <td><a href="https://u.cisco.com/" target="_blank">Cisco AI Technical Practitioner (AITECH) on Cisco U.</a></td>
-                  <td>
-                    <select class="leadership-decision">
-                      <option value="approved" selected>Approved</option>
-                      <option value="reject">Reject</option>
-                    </select>
-                  </td>
-                  <td><textarea class="leadership-comment" placeholder="Add comments..."></textarea></td>
-                  <td><button class="save-btn" onclick="saveReview(this)">Save</button></td>
-                </tr>
-                <tr style="background-color: #f9f9f9;">
-                  <td class="timeline"><strong>90-Day</strong></td>
-                  <td><strong>AI Technical Implementation & Workflows</strong></td>
-                  <td>Building AI applications and workflows</td>
-                  <td>Network Engineering, Solution Architecture</td>
-                  <td><span class="badge red">Red</span></td>
-                  <td><span class="priority must">MUST HAVE</span></td>
-                  <td><a href="https://learn.microsoft.com/en-us/training/paths/develop-ai-agents-azure-openai/" target="_blank">MS Learn: Build AI apps with Azure OpenAI</a> (Free)</td>
-                  <td>
-                    <select class="leadership-decision">
-                      <option value="approved" selected>Approved</option>
-                      <option value="reject">Reject</option>
-                    </select>
-                  </td>
-                  <td><textarea class="leadership-comment" placeholder="Add comments..."></textarea></td>
-                  <td><button class="save-btn" onclick="saveReview(this)">Save</button></td>
-                </tr>
-                <tr>
-                  <td class="timeline"><strong>90-Day</strong></td>
-                  <td><strong>AI Innovations with Cisco Webex & Smart Apps</strong></td>
-                  <td>Cisco Webex AI features and smart application development</td>
-                  <td>Project Management, Service Delivery Management</td>
-                  <td><span class="badge both">Blue & Red</span></td>
-                  <td><span class="priority good">GOOD TO HAVE</span></td>
-                  <td>Public DevNet Sandboxes / <a href="https://www.ciscolive.com/on-demand.html" target="_blank">Cisco Live Public On-Demand</a></td>
-                  <td>
-                    <select class="leadership-decision">
-                      <option value="approved" selected>Approved</option>
-                      <option value="reject">Reject</option>
-                    </select>
-                  </td>
-                  <td><textarea class="leadership-comment" placeholder="Add comments..."></textarea></td>
-                  <td><button class="save-btn" onclick="saveReview(this)">Save</button></td>
-                </tr>
-                <tr style="background-color: #f9f9f9;">
-                  <td class="timeline"><strong>90-Day</strong></td>
-                  <td><strong>Advanced Workflows & CI/CD Integration</strong></td>
-                  <td>Advanced workflow patterns and CI/CD pipeline integration</td>
-                  <td>Network Engineering, Solution Architecture</td>
-                  <td><span class="badge both">Blue & Red</span></td>
-                  <td><span class="priority good">GOOD TO HAVE</span></td>
-                  <td>BB: Cisco RunOn / RB: Copilot Bootcamp</td>
-                  <td>
-                    <select class="leadership-decision">
-                      <option value="approved" selected>Approved</option>
-                      <option value="reject">Reject</option>
-                    </select>
-                  </td>
-                  <td><textarea class="leadership-comment" placeholder="Add comments..."></textarea></td>
-                  <td><button class="save-btn" onclick="saveReview(this)">Save</button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- Slide 6: 90-Day Courses Part 2 -->
-        <section class="slide">
-          <h2 class="slide-title">90-Day Courses - Part 2 & Summary</h2>
-          <p class="slide-subtitle">Responsible AI & Security course (mandatory for all roles) + Training Timeline Summary.</p>
-
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Timeline</th>
-                  <th>Topic/Skill</th>
-                  <th>About Training</th>
-                  <th>Target CX Roles</th>
-                  <th>Badge Access</th>
-                  <th>Classification</th>
-                  <th>Resource</th>
-                  <th>Leadership Decision</th>
-                  <th>Leadership Comments</th>
-                  <th>Save Review</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="timeline"><strong>90-Day</strong></td>
-                  <td><strong>Responsible AI & Code Security</strong></td>
-                  <td>Ethical AI principles and secure coding practices</td>
-                  <td>All CX Roles</td>
-                  <td><span class="badge both">Blue & Red</span></td>
-                  <td><span class="priority must">MUST HAVE</span></td>
-                  <td>BB & RB: <a href="https://learn.microsoft.com/" target="_blank">MS Learn - Responsible AI Principles</a></td>
-                  <td>
-                    <select class="leadership-decision">
-                      <option value="approved" selected>Approved</option>
-                      <option value="reject">Reject</option>
-                    </select>
-                  </td>
-                  <td><textarea class="leadership-comment" placeholder="Add comments..."></textarea></td>
-                  <td><button class="save-btn" onclick="saveReview(this)">Save</button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="kpi-row" style="margin-top: 14px;">
-            <div class="kpi">
-              <div class="kpi-label">30-Day MUST HAVE</div>
-              <div class="kpi-value">3</div>
-            </div>
-            <div class="kpi">
-              <div class="kpi-label">60-Day MUST HAVE</div>
-              <div class="kpi-value">3</div>
-            </div>
-            <div class="kpi">
-              <div class="kpi-label">90-Day MUST HAVE</div>
-              <div class="kpi-value">4</div>
-            </div>
-            <div class="kpi">
-              <div class="kpi-label">All GOOD TO HAVE</div>
-              <div class="kpi-value">5</div>
-            </div>
-          </div>
-
-          <p class="slide-subtitle" style="margin-top: 12px;">🎯 <strong>Key Actions:</strong> Assign MUST HAVE courses by role at Day 1 with 14-day deadline. Send reminders on Day 7 & escalate to managers on Day 14. Track GOOD TO HAVE for leadership reporting.</p>
-        </section>
-
-        <!-- Slide 8: Conclusion -->
-        <section class="slide">
-          <h2 class="slide-title">Conclusion &amp; Next Steps</h2>
-          <p class="slide-subtitle">Turning high AI adoption into measurable, governed capability across the CX SP organization.</p>
-
-          <div class="rollout-block">
-            <h3>Key Takeaways</h3>
-            <ul>
-              <li><strong>Adoption is strong, readiness is the gap:</strong> 259 of 261 already use AI, yet only 108 are formally trained — this program closes that gap.</li>
-              <li><strong>Structured &amp; role-based:</strong> a clear 30-60-90 day roadmap with MUST HAVE and GOOD TO HAVE courses mapped to every CX role.</li>
-              <li><strong>Accountable &amp; visible:</strong> automated assignment, reminders, manager escalation, and bi-weekly leadership reporting keep delivery on track.</li>
-              <li><strong>Responsible by design:</strong> security and ethical AI practices are embedded as mandatory for all roles.</li>
-            </ul>
-          </div>
-
-          <div class="rollout-block">
-            <h3>Immediate Next Steps</h3>
-            <ul>
-              <li><strong>Approve</strong> the proposed curriculum and the 14-day completion policy with manager escalation.</li>
-              <li><strong>Sponsor</strong> protected enablement time so teams can complete MUST HAVE modules on schedule.</li>
-              <li><strong>Kick off</strong> Day 1 assignments and begin tracking completion against the 30-60-90 day milestones.</li>
-              <li><strong>Review</strong> progress at the first bi-weekly leadership checkpoint and adjust as needed.</li>
-            </ul>
-          </div>
-
-          <div class="rollout-block">
-            <h3>Expected Outcome</h3>
-            <p class="slide-subtitle" style="margin: 0;">
-              Within 90 days, the CX SP organization moves from broad AI usage to a consistent, certified skill
-              baseline — improving delivery speed, automation quality, and customer outcomes, with full leadership
-              visibility into readiness.
-            </p>
-          </div>
-
-          <p class="slide-subtitle" style="margin-top: 8px; text-align: center; font-weight: 700; color: #0052cc;">Thank you — Questions &amp; Discussion</p>
-        </section>
-      </div>
-    </div>
-
-    <div class="nav">
-      <button class="btn" id="prevBtn">Previous</button>
-      <span class="slide-count" id="slideCount">1 / 7</span>
-      <button class="btn" id="nextBtn">Next</button>
-      <span class="dot active" data-go="0"></span>
-      <span class="dot" data-go="1"></span>
-      <span class="dot" data-go="2"></span>
-      <span class="dot" data-go="3"></span>
-      <span class="dot" data-go="4"></span>
-      <span class="dot" data-go="5"></span>
-      <span class="dot" data-go="6"></span>
-      <span class="dot" data-go="7"></span>
-    </div>
-  </div>
-
-  <script>
-    const slides = Array.from(document.querySelectorAll('.slide'));
-    const dots = Array.from(document.querySelectorAll('.dot'));
-    const countEl = document.getElementById('slideCount');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const slidesContainer = document.getElementById('slides');
-    let index = 0;
-
-    function showSlide(i) {
-      index = Math.max(0, Math.min(i, slides.length - 1));
-      slidesContainer.style.transform = `translateX(-${index * 100}%)`;
-      countEl.textContent = `${index + 1} / ${slides.length}`;
-      
-      dots.forEach((d, idx) => d.classList.toggle('active', idx === index));
-      
-      prevBtn.disabled = index === 0;
-      nextBtn.disabled = index === slides.length - 1;
-    }
-
-    prevBtn.addEventListener('click', () => showSlide(index - 1));
-    nextBtn.addEventListener('click', () => showSlide(index + 1));
-    dots.forEach((d) => d.addEventListener('click', () => showSlide(Number(d.dataset.go))));
-
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
-        showSlide(index + 1);
-        e.preventDefault();
-      }
-      if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
-        showSlide(index - 1);
-        e.preventDefault();
-      }
-      if (e.key === 'Home') showSlide(0);
-      if (e.key === 'End') showSlide(slides.length - 1);
-    });
-
-    // Touch swipe
-    let touchStart = 0;
-    document.addEventListener('touchstart', (e) => { touchStart = e.changedTouches[0].screenX; }, { passive: true });
-    document.addEventListener('touchend', (e) => {
-      const touchEnd = e.changedTouches[0].screenX;
-      if (Math.abs(touchEnd - touchStart) > 40) {
-        if (touchEnd < touchStart) showSlide(index + 1);
-        else showSlide(index - 1);
-      }
-    }, { passive: true });
-
-    showSlide(0);
-
-    // Save review function
-    function saveReview(btn) {
-      const row = btn.closest('tr');
-      const skill = row.querySelector('td:nth-child(2)')?.textContent || 'Unknown';
-      const decision = row.querySelector('.leadership-decision')?.value || 'N/A';
-      const comment = row.querySelector('.leadership-comment')?.value || '';
-      
-      const data = {
-        skill: skill.trim(),
-        decision: decision,
-        comment: comment,
-        timestamp: new Date().toLocaleString()
-      };
-      
-      // Store in localStorage
-      let reviews = JSON.parse(localStorage.getItem('trainingReviews')) || [];
-      const existingIndex = reviews.findIndex(r => r.skill === data.skill);
-      
-      if (existingIndex >= 0) {
-        reviews[existingIndex] = data;
-      } else {
-        reviews.push(data);
-      }
-      
-      localStorage.setItem('trainingReviews', JSON.stringify(reviews));
-      
-      // Visual feedback
-      btn.textContent = '✓ Saved';
-      btn.style.background = '#1b5e20';
-      setTimeout(() => {
-        btn.textContent = 'Save';
-        btn.style.background = '#0052cc';
-      }, 2000);
-      
-      console.log('Review saved:', data);
-    }
-  </script>
+    <!-- Reveal.js Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script>
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'fade',
+            backgroundTransition: 'fade'
+        });
+    </script>
 </body>
 </html>
