@@ -708,6 +708,138 @@
       .dot { width: 6px; height: 6px; }
       .dot.active { width: 16px; }
     }
+
+    /* ===== Dynamic ROI dashboard ===== */
+    .roi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    .roi-card {
+      position: relative;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px 18px 18px;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(0, 27, 68, 0.08);
+      transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+
+    .roi-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 34px rgba(0, 27, 68, 0.18);
+    }
+
+    .roi-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #00bceb, #0052cc);
+    }
+
+    .roi-ring {
+      --val: 0;
+      width: 132px;
+      height: 132px;
+      margin: 6px auto 14px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(closest-side, #fff 78%, transparent 79% 100%),
+        conic-gradient(#0052cc calc(var(--val) * 1%), #e3eefc 0);
+      transition: background 1.2s ease;
+    }
+
+    .roi-ring .ring-inner {
+      text-align: center;
+    }
+
+    .roi-ring .ring-num {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: #001b44;
+      line-height: 1;
+    }
+
+    .roi-ring .ring-unit {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--cisco-blue);
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+
+    .roi-card .roi-emoji {
+      font-size: 1.4rem;
+      margin-bottom: 2px;
+    }
+
+    .roi-card h3 {
+      margin: 4px 0 4px;
+      font-size: 1.12rem;
+      color: #001b44;
+    }
+
+    .roi-card .roi-pill {
+      display: inline-block;
+      background: #e3f2fd;
+      color: #0052cc;
+      border: 1px solid #bcdcff;
+      border-radius: 999px;
+      padding: 3px 12px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .roi-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.45;
+      color: var(--muted);
+    }
+
+    .roi-card .roi-trend {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .roi-card .roi-trend.up { color: #1b9e3e; }
+    .roi-card .roi-trend.down { color: #d32f2f; }
+
+    /* progress bar mini */
+    .roi-bar {
+      height: 7px;
+      border-radius: 999px;
+      background: #e3eefc;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+
+    .roi-bar > span {
+      display: block;
+      height: 100%;
+      width: 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #00bceb, #0052cc);
+      transition: width 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    @keyframes ringPop {
+      0% { transform: scale(0.92); opacity: 0.4; }
+      60% { transform: scale(1.03); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .slide.roi-active .roi-ring { animation: ringPop 0.7s ease both; }
   </style>
 </head>
 <body>
@@ -1285,25 +1417,51 @@
         </section>
 
         <!-- Slide: Measuring ROI & Effectiveness -->
-        <section class="slide">
+        <section class="slide" id="roiSlide">
           <h2 class="slide-title">Measuring ROI &amp; Effectiveness</h2>
-          <p class="lead">A data-driven program with continuous tracking of impact across speed, quality, and adoption.</p>
+          <p class="lead">A data-driven program with continuous tracking of impact across speed, quality, and adoption — illustrative targets shown as the program scales.</p>
 
-          <div class="metric-grid">
-            <div class="metric-card">
-              <div class="metric-head"><span class="metric-emoji">⏱️</span><h3>Speed</h3></div>
-              <span class="metric-pill">Reduction in TTR</span>
-              <p>Tracking how AI-trained engineers resolve complex cases faster, lowering Time to Resolution.</p>
+          <div class="roi-grid">
+            <div class="roi-card">
+              <div class="roi-ring" data-val="35">
+                <div class="ring-inner">
+                  <div class="ring-num" data-count="35" data-suffix="%">0%</div>
+                  <div class="ring-unit">Faster TTR</div>
+                </div>
+              </div>
+              <div class="roi-emoji">⏱️</div>
+              <h3>Speed</h3>
+              <span class="roi-pill">Reduction in TTR</span>
+              <p>AI-trained engineers resolve complex cases faster, lowering Time to Resolution.</p>
+              <div class="roi-trend up">▲ Trending up quarter over quarter</div>
             </div>
-            <div class="metric-card">
-              <div class="metric-head"><span class="metric-emoji">⭐</span><h3>Quality</h3></div>
-              <span class="metric-pill">CSAT &amp; Consistency</span>
-              <p>Ensuring AI usage elevates the customer experience without hallucination or accuracy risks.</p>
+
+            <div class="roi-card">
+              <div class="roi-ring" data-val="92">
+                <div class="ring-inner">
+                  <div class="ring-num" data-count="92" data-suffix="%">0%</div>
+                  <div class="ring-unit">CSAT Target</div>
+                </div>
+              </div>
+              <div class="roi-emoji">⭐</div>
+              <h3>Quality</h3>
+              <span class="roi-pill">CSAT &amp; Consistency</span>
+              <p>AI usage elevates the customer experience without hallucination or accuracy risks.</p>
+              <div class="roi-trend up">▲ Consistent scores across theatres</div>
             </div>
-            <div class="metric-card">
-              <div class="metric-head"><span class="metric-emoji">📈</span><h3>Adoption</h3></div>
-              <span class="metric-pill">Active Daily Usage</span>
-              <p>Measuring how often trained engineers utilize AI tools within their daily workflows.</p>
+
+            <div class="roi-card">
+              <div class="roi-ring" data-val="78">
+                <div class="ring-inner">
+                  <div class="ring-num" data-count="78" data-suffix="%">0%</div>
+                  <div class="ring-unit">Active Usage</div>
+                </div>
+              </div>
+              <div class="roi-emoji">📈</div>
+              <h3>Adoption</h3>
+              <span class="roi-pill">Active Daily Usage</span>
+              <p>Trained engineers actively use AI tools within their daily workflows.</p>
+              <div class="roi-bar"><span data-fill="78"></span></div>
             </div>
           </div>
         </section>
@@ -1382,6 +1540,42 @@
       
       prevBtn.disabled = index === 0;
       nextBtn.disabled = index === slides.length - 1;
+
+      if (slides[index] && slides[index].id === 'roiSlide') {
+        animateRoi(slides[index]);
+      }
+    }
+
+    // Animate the ROI dashboard (rings, count-up numbers, bars)
+    let roiAnimated = false;
+    function animateRoi(slide) {
+      if (roiAnimated) return;
+      roiAnimated = true;
+      slide.classList.add('roi-active');
+
+      slide.querySelectorAll('.roi-ring').forEach((ring) => {
+        const val = Number(ring.dataset.val) || 0;
+        requestAnimationFrame(() => ring.style.setProperty('--val', val));
+      });
+
+      slide.querySelectorAll('.ring-num').forEach((el) => {
+        const target = Number(el.dataset.count) || 0;
+        const suffix = el.dataset.suffix || '';
+        const duration = 1200;
+        const start = performance.now();
+        function tick(now) {
+          const p = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(eased * target) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+
+      slide.querySelectorAll('.roi-bar > span').forEach((bar) => {
+        const fill = Number(bar.dataset.fill) || 0;
+        requestAnimationFrame(() => { bar.style.width = fill + '%'; });
+      });
     }
 
     prevBtn.addEventListener('click', () => showSlide(index - 1));
