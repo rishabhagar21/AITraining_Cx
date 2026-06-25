@@ -967,6 +967,39 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: transform 0.25s ease;
+    }
+
+    /* Staggered entrance for agenda chips when slide becomes active */
+    .agenda-chip {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+
+    .slide.is-active .agenda-chip {
+      animation: agendaIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .slide.is-active .agenda-chip:nth-child(1) { animation-delay: 0.10s; }
+    .slide.is-active .agenda-chip:nth-child(2) { animation-delay: 0.22s; }
+    .slide.is-active .agenda-chip:nth-child(3) { animation-delay: 0.34s; }
+    .slide.is-active .agenda-chip:nth-child(4) { animation-delay: 0.46s; }
+    .slide.is-active .agenda-chip:nth-child(5) { animation-delay: 0.58s; }
+
+    .agenda-chip:hover {
+      background: #e2eefe;
+      border-color: var(--cisco-blue);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 82, 204, 0.18);
+    }
+
+    .agenda-chip:hover .ac-num {
+      transform: scale(1.12);
+    }
+
+    @keyframes agendaIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     .ask-banner {
@@ -990,8 +1023,59 @@
       color: #5c3d00;
     }
 
+    /* Guiding Principles strip (Executive Introduction) */
+    .principles { margin-top: 16px; }
+
+    .principles-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--cisco-blue);
+      margin: 0 0 10px;
+    }
+
+    .principle-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .principle {
+      position: relative;
+      background: #f0f7ff;
+      border: 1px solid #d2e5fb;
+      border-left: 4px solid var(--cisco-blue);
+      border-radius: 10px;
+      padding: 12px 14px 12px 44px;
+    }
+
+    .principle .pr-num {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--cisco-blue);
+      color: #fff;
+      font-size: 0.74rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .principle p {
+      margin: 0;
+      font-size: 0.8rem;
+      line-height: 1.45;
+      color: var(--text);
+    }
+
     @media (max-width: 820px) {
       .exec-hero { grid-template-columns: 1fr; }
+      .principle-grid { grid-template-columns: 1fr; }
     }
 
     /* ===== Conclusion & Next Steps ===== */
@@ -1211,7 +1295,111 @@
     @media (prefers-reduced-motion: reduce) {
       .ico-float, .ico-pulse, .ico-bounce, .ico-spin,
       .ico-swing, .ico-shield, .ico-launch { animation: none; }
+      .agenda-chip { opacity: 1; transform: none; }
+      .slide.is-active .agenda-chip { animation: none; }
     }
+
+    /* ===================================================== */
+    /* ===============  DARK THEME OVERRIDES  =============== */
+    /* ===================================================== */
+    :root {
+      --bg: #0d1117;
+      --panel: #161b22;
+      --text: #e6edf3;
+      --muted: #9aa7b4;
+      --line: #2a3340;
+      --blue-accent: #4d9fff;
+      --red-accent: #ff6b6b;
+      --light-bg: #1b2230;
+      --cisco-blue: #2f81f7;
+      --cisco-dark: #0a142e;
+    }
+
+    html, body {
+      background: linear-gradient(135deg, #0a0f1a 0%, #11161f 100%);
+    }
+
+    .slide-container { background: var(--bg); }
+
+    .slide-title {
+      color: #6ab0ff;
+      border-bottom-color: var(--line);
+    }
+
+    /* Tables */
+    .table-wrap { background: var(--panel); }
+    th, td { border-color: var(--line); }
+    tbody tr:hover { background-color: #1f2937; }
+
+    /* Form controls */
+    select, textarea {
+      background: var(--panel);
+      color: var(--text);
+      border-color: var(--line);
+    }
+
+    /* Nav + buttons */
+    .nav { background: rgba(22, 27, 34, 0.95); }
+    .btn {
+      background: var(--panel);
+      color: var(--text);
+    }
+    .btn:hover:not(:disabled) { background: #1f2937; }
+
+    /* Card / panel surfaces (formerly #fff) */
+    .kpi,
+    .rollout-block,
+    .feature-card,
+    .step,
+    .metric-card,
+    .flow-node,
+    .roi-card,
+    .pillar,
+    .close-card { background: var(--panel); }
+
+    /* Card headings (formerly #001b44) */
+    .rollout-block h3,
+    .feature-card h3,
+    .step h3,
+    .metric-card h3,
+    .flow-node h3,
+    .roi-card h3,
+    .pillar h4,
+    .close-card h3,
+    .roi-ring .ring-num { color: var(--text); }
+
+    /* Links */
+    a { color: #6ab0ff; }
+
+    /* ROI ring + progress track */
+    .roi-ring {
+      background:
+        radial-gradient(closest-side, var(--panel) 78%, transparent 79% 100%),
+        conic-gradient(#2f81f7 calc(var(--val) * 1%), #243044 0);
+    }
+    .roi-bar { background: #243044; }
+
+    /* Guiding principles block */
+    .principle {
+      background: #15233a;
+      border-color: #284a73;
+      border-left-color: var(--cisco-blue);
+    }
+
+    /* Agenda chips */
+    .agenda-chip {
+      background: #16263f;
+      border-color: #284a73;
+      color: #cfe0fb;
+    }
+    .agenda-chip:hover {
+      background: #1d3358;
+      border-color: var(--cisco-blue);
+    }
+
+    /* Dashed dividers inside close cards */
+    .check-list li,
+    .num-list li { border-bottom-color: var(--line); }
   </style>
 </head>
 <body>
@@ -1260,7 +1448,7 @@
             </div>
             <div class="pillar">
               <h4><span class="ico ico-shield">🛡️</span> The Guardrails</h4>
-              <p>A governed program ensures responsible, secure AI use and one consistent skill baseline across APJC.</p>
+              <p>A governed program ensures responsible, secure AI use and one consistent skill baseline across APJC. It also ensures Training Opex is effectively used and scanned by AI-Champions to optimize and make effective use of the training budget.</p>
             </div>
           </div>
 
@@ -1272,9 +1460,27 @@
             <span class="agenda-chip"><span class="ac-num">5</span> Leadership Review &amp; Next Steps</span>
           </div>
 
+          <div class="principles">
+            <p class="principles-title">Guiding Principles</p>
+            <div class="principle-grid">
+              <div class="principle">
+                <span class="pr-num">1</span>
+                <p><strong>Tied to real problems:</strong> learning courses are mapped to specific problem statements and field use-cases — not generic training.</p>
+              </div>
+              <div class="principle">
+                <span class="pr-num">2</span>
+                <p><strong>Workflow-aware:</strong> different workflows translate into different learning needs, so curricula adapt by role and function.</p>
+              </div>
+              <div class="principle">
+                <span class="pr-num">3</span>
+                <p><strong>Efficacy measured:</strong> program impact is verified by problems and use-cases solved after formal learning or by optimizing existing workflows.</p>
+              </div>
+            </div>
+          </div>
+
           <div class="ask-banner">
             <span class="ab-icon ico ico-bounce">✅</span>
-            <p><strong>The ask of leadership:</strong> approve the proposed curriculum, endorse the 14-day completion policy with manager escalation, and sponsor protected enablement time so the team closes the gap on schedule. You can approve or comment on each course directly within this deck.</p>
+            <p><strong>The ask of leadership:</strong> approve the proposed curriculum, endorse the 14-day completion policy with manager escalation, sponsor protected enablement time, and <strong>nominate engineers from each SP team for enrollment</strong> — nominees will eventually grow into the APJC AI Champions network. You can approve or comment on each course directly within this deck.</p>
           </div>
         </section>
 
@@ -1809,17 +2015,18 @@
               <h3><span class="ico ico-swing">📌</span> Why This Matters</h3>
               <ul class="check-list">
                 <li><strong>Close the readiness gap:</strong> 259/261 use AI, only 108 are trained — this program converts adoption into capability.</li>
+                <li><strong>Tied to real problems:</strong> courses map to actual problem statements and use-cases, and adapt to different workflows and learning needs.</li>
                 <li><strong>Field-driven &amp; role-based:</strong> an integrated learning engine and a 30-60-90 curriculum mapped to every CX role.</li>
-                <li><strong>Governed &amp; visible:</strong> automated assignment, escalation, and bi-weekly leadership reporting keep delivery on track.</li>
-                <li><strong>Responsible by design:</strong> secure and ethical AI practices are mandatory for all roles.</li>
+                <li><strong>Efficacy you can measure:</strong> success is tracked by problems/use-cases solved after learning and by optimized workflows.</li>
+                <li><strong>Governed &amp; responsible:</strong> automated assignment, escalation, bi-weekly reporting, and mandatory secure, ethical AI practices.</li>
               </ul>
             </div>
             <div class="close-card nextsteps">
               <h3><span class="ico ico-launch">🚀</span> What We Need From You</h3>
               <ol class="num-list">
+                <li><strong>Nominate</strong> engineers from each SP team for enrollment — nominees will grow into the APJC AI Champions network.</li>
                 <li><strong>Approve</strong> the curriculum and the 14-day completion policy with manager escalation.</li>
                 <li><strong>Sponsor</strong> protected enablement time to complete MUST HAVE modules on schedule.</li>
-                <li><strong>Endorse</strong> the AI Champions network across APJC sub-theatres.</li>
                 <li><strong>Review</strong> progress at the first bi-weekly leadership checkpoint.</li>
               </ol>
             </div>
@@ -1883,6 +2090,7 @@
       countEl.textContent = `${index + 1} / ${slides.length}`;
       
       dots.forEach((d, idx) => d.classList.toggle('active', idx === index));
+      slides.forEach((s, idx) => s.classList.toggle('is-active', idx === index));
       
       prevBtn.disabled = index === 0;
       nextBtn.disabled = index === slides.length - 1;
