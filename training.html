@@ -840,6 +840,159 @@
     }
 
     .slide.roi-active .roi-ring { animation: ringPop 0.7s ease both; }
+
+    /* ===== Executive Introduction ===== */
+    .exec-hero {
+      background: linear-gradient(135deg, #001b44 0%, #0052cc 100%);
+      color: #fff;
+      border-radius: 16px;
+      padding: 20px 24px;
+      box-shadow: 0 10px 26px rgba(0, 27, 68, 0.22);
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .exec-hero .eh-lead h3 {
+      margin: 0 0 8px;
+      font-size: 1.18rem;
+      color: #fff;
+    }
+
+    .exec-hero .eh-lead p {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      opacity: 0.94;
+    }
+
+    .gap-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .gap-stat {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 12px;
+      padding: 12px 8px;
+      text-align: center;
+      backdrop-filter: blur(3px);
+    }
+
+    .gap-stat .gs-num {
+      font-size: 1.7rem;
+      font-weight: 800;
+      line-height: 1;
+      color: #00bceb;
+    }
+
+    .gap-stat.alert .gs-num { color: #ffd166; }
+
+    .gap-stat .gs-label {
+      font-size: 0.68rem;
+      margin-top: 5px;
+      opacity: 0.92;
+      line-height: 1.3;
+    }
+
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .pillar {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--cisco-blue);
+      border-radius: 12px;
+      padding: 14px 16px;
+      box-shadow: 0 5px 14px rgba(0, 27, 68, 0.06);
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .pillar:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(0, 27, 68, 0.14);
+    }
+
+    .pillar h4 {
+      margin: 0 0 5px;
+      font-size: 0.98rem;
+      color: #001b44;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pillar p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      color: var(--muted);
+    }
+
+    .agenda-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .agenda-chip {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: #eef4fd;
+      border: 1px solid #cfe1fb;
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #0c2c63;
+    }
+
+    .agenda-chip .ac-num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--cisco-blue);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ask-banner {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: linear-gradient(135deg, #fff7e6, #ffeccc);
+      border: 1px solid #ffd599;
+      border-left: 6px solid #f5a623;
+      border-radius: 12px;
+      padding: 14px 18px;
+    }
+
+    .ask-banner .ab-icon { font-size: 1.6rem; }
+
+    .ask-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: #5c3d00;
+    }
+
+    @media (max-width: 820px) {
+      .exec-hero { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -854,68 +1007,56 @@
         <!-- Slide 1: Executive Introduction -->
         <section class="slide">
           <h2 class="slide-title">Executive Introduction</h2>
-          <p class="slide-subtitle">Prepared for the Cisco CX SP Leadership Team &nbsp;|&nbsp; AI Enablement Program &nbsp;|&nbsp; 30-60-90 Day Roadmap</p>
+          <p class="slide-subtitle">Prepared for Cisco CX SP Leadership &nbsp;|&nbsp; AI Learning with Purpose — APJC SP &nbsp;|&nbsp; 30-60-90 Day Roadmap</p>
 
-          <div class="rollout-block">
-            <h3>Purpose of This Presentation</h3>
-            <p class="slide-subtitle" style="margin: 0;">
-              This briefing presents a structured 30-60-90 day AI enablement roadmap for the CX SP organization.
-              Our goal is to convert the team's already-high AI adoption into measurable, role-based capability
-              through a governed training program with clear leadership visibility, accountability, and decision points.
-            </p>
-          </div>
-
-          <div class="rollout-block">
-            <h3>Why Now — The Business Case</h3>
-            <ul>
-              <li><strong>Adoption is ahead of capability:</strong> 259 of 261 team members already use AI, with strong daily usage — yet only 108 are formally AI-trained, leaving a clear readiness gap.</li>
-              <li><strong>Competitive imperative:</strong> AI fluency directly impacts delivery speed, automation quality, and customer outcomes across Network Engineering, PM, SDM, and Solution Architecture.</li>
-              <li><strong>Governance &amp; risk:</strong> A structured program ensures responsible, secure AI use and a consistent skill baseline across every CX role.</li>
-            </ul>
-          </div>
-
-          <div class="rollout-block">
-            <h3>What You Will See Today</h3>
-            <ul>
-              <li><strong>Training Overview &amp; Survey Findings</strong> — adoption vs. completion data and program KPIs.</li>
-              <li><strong>Rollout Plan</strong> — automated assignment, reminders, escalation, and bi-weekly leadership reporting.</li>
-              <li><strong>Curriculum by Phase</strong> — 30, 60, and 90-day MUST HAVE and GOOD TO HAVE courses, mapped by role.</li>
-              <li><strong>Leadership Review</strong> — approve or comment on each course directly within this deck.</li>
-            </ul>
-          </div>
-
-          <div class="rollout-block">
-            <h3>The Ask of Leadership</h3>
-            <p class="slide-subtitle" style="margin: 0;">
-              Review and approve the proposed curriculum, endorse the 14-day completion policy with manager
-              escalation, and sponsor protected enablement time so the team can close the training gap on schedule.
-            </p>
-          </div>
-
-          <div class="kpi-row" style="margin-top: 8px;">
-            <div class="kpi">
-              <div class="kpi-label">Total Courses</div>
-              <div class="kpi-value">15</div>
+          <div class="exec-hero">
+            <div class="eh-lead">
+              <h3>Converting AI adoption into measurable, governed capability</h3>
+              <p>Our team has embraced AI faster than it has been formally trained. This program closes that readiness gap with a use-case-driven curriculum, an APJC Champions network, and a governed 30-60-90 day rollout — delivering <strong>fast, high-quality &amp; consistent</strong> customer outcomes.</p>
             </div>
-            <div class="kpi">
-              <div class="kpi-label">Timelines</div>
-              <div class="kpi-value">3</div>
-            </div>
-            <div class="kpi">
-              <div class="kpi-label">Target Roles</div>
-              <div class="kpi-value">5</div>
-            </div>
-            <div class="kpi">
-              <div class="kpi-label">MUST HAVE</div>
-              <div class="kpi-value">10</div>
-            </div>
-            <div class="kpi">
-              <div class="kpi-label">GOOD TO HAVE</div>
-              <div class="kpi-value">5</div>
+            <div class="gap-stats">
+              <div class="gap-stat">
+                <div class="gs-num">259<span style="font-size:0.9rem">/261</span></div>
+                <div class="gs-label">Already using AI</div>
+              </div>
+              <div class="gap-stat alert">
+                <div class="gs-num">108</div>
+                <div class="gs-label">Formally AI-trained</div>
+              </div>
+              <div class="gap-stat">
+                <div class="gs-num">15</div>
+                <div class="gs-label">Curated courses</div>
+              </div>
             </div>
           </div>
 
-          <p class="slide-subtitle" style="margin-top: 8px;"><strong>Navigation:</strong> Use the Previous / Next buttons, the arrow keys, or swipe to move through the deck.</p>
+          <div class="pillar-grid">
+            <div class="pillar">
+              <h4>📊 The Gap</h4>
+              <p>High adoption, lower readiness — strong daily AI usage, yet fewer than half are formally trained.</p>
+            </div>
+            <div class="pillar">
+              <h4>🚀 The Opportunity</h4>
+              <p>AI fluency directly lifts delivery speed, automation quality, and customer outcomes across every CX role.</p>
+            </div>
+            <div class="pillar">
+              <h4>🛡️ The Guardrails</h4>
+              <p>A governed program ensures responsible, secure AI use and one consistent skill baseline across APJC.</p>
+            </div>
+          </div>
+
+          <div class="agenda-strip">
+            <span class="agenda-chip"><span class="ac-num">1</span> Integrated Learning Engine</span>
+            <span class="agenda-chip"><span class="ac-num">2</span> Adoption &amp; Measurable Impact</span>
+            <span class="agenda-chip"><span class="ac-num">3</span> Rollout &amp; Governance</span>
+            <span class="agenda-chip"><span class="ac-num">4</span> 30-60-90 Curriculum by Role</span>
+            <span class="agenda-chip"><span class="ac-num">5</span> Leadership Review &amp; Next Steps</span>
+          </div>
+
+          <div class="ask-banner">
+            <span class="ab-icon">✅</span>
+            <p><strong>The ask of leadership:</strong> approve the proposed curriculum, endorse the 14-day completion policy with manager escalation, and sponsor protected enablement time so the team closes the gap on schedule. You can approve or comment on each course directly within this deck.</p>
+          </div>
         </section>
 
         <!-- Slide 2: Use-Case Driven, Field-Designed Curriculum -->
